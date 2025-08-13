@@ -23,7 +23,7 @@ import Todo from "./Todo";
 
 // OTHERS
 import { TodosContext } from "../contexts/todosContext";
-import { Snak } from "../contexts/SnakContext";
+import { useSnak } from "../contexts/SnakContext";
 import { useContext, useState, useEffect, useMemo } from "react";
 // DIALOG IMPORTS
 import Dialog from "@mui/material/Dialog";
@@ -33,7 +33,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
-  const ShowSnak = useContext(Snak);
+  const ShowSnak = useSnak();
   const [titleInput, setTitleInput] = useState("");
   const [displayedTodosType, setDisplayedTodosType] = useState("all");
 
@@ -94,9 +94,10 @@ export default function TodoList() {
 
     const updatedTodos = [...todos, newTodo];
     setTodos(updatedTodos);
-    ShowSnak("تمت الاضافة بنجاح")
+
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     setTitleInput("");
+    ShowSnak("تمت الاضافة بنجاح")
   }
    
 
@@ -114,9 +115,9 @@ export default function TodoList() {
       return t.id != passed.id;
     });
     setTodos(updatedTodos);
-        ShowSnak("تم الحذف بنجاح")
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    setShowDeleteDialog(false)
+    setShowDeleteDialog(false);
+    ShowSnak("تم الحذف بنجاح")
   }
 
 
@@ -142,8 +143,8 @@ export default function TodoList() {
 
     setTodos(updatedTodos);
     setShowUpdateDialog(false);
-        ShowSnak("تم التحديث بنجاح")
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    ShowSnak("تم التحديث بنجاح")
   }
   return ( 
     <>

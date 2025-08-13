@@ -4,7 +4,7 @@ import TodoList from "./components/TodoList";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { TodosContext } from "./contexts/todosContext";
 import { useState } from "react";
-import { Snak } from "./contexts/SnakContext";
+import { SnakProvider } from "./contexts/SnakContext";
 import { v4 as uuidv4 } from "uuid";
 import SimpleSnackbar from "./components/Snak";
 const theme = createTheme({
@@ -39,15 +39,8 @@ const initialTodos = [
 
 function App() {
   const [todos, setTodos] = useState(initialTodos);
-  const [open, setOpen] = useState(false);
-  const [content, setContent] = useState('')
-  function ShowSnak(op){
-    setOpen(true);
-    setContent(op)
-    setTimeout(()=>{
-      setOpen(false)
-    }, 3000)
-  }
+
+  
   return (
     <ThemeProvider theme={theme}>
       <div
@@ -61,12 +54,12 @@ function App() {
           direction: "rtl",
         }}
       >
-        <Snak.Provider value={ShowSnak}>
+        <SnakProvider >
         <TodosContext.Provider value={{ todos, setTodos }}>
           <TodoList />
-          <SimpleSnackbar open={open} content={content}/>
+          
         </TodosContext.Provider>
-        </Snak.Provider>
+        </SnakProvider>
       </div>
     </ThemeProvider>
   );

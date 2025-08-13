@@ -16,9 +16,9 @@ import { useContext, useState } from "react";
 import { TodosContext } from "../contexts/todosContext";
 
 
-import { Snak } from "../contexts/SnakContext";
+import { useSnak } from "../contexts/SnakContext";
 export default function Todo({ todo, handleCheck, DelHandeler, ModHandeler }) {
-    const ShowSnak = useContext(Snak);
+    const ShowSnak = useSnak();
   
   const [updatedTodo, setUpdatedTodo] = useState({
     title: todo.title,
