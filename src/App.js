@@ -54,7 +54,7 @@ function App() {
           direction: "rtl",
         }}
       >
-        <SnakProvider >
+        <SnakProvider  >
         <TodosContext.Provider value={{ todos, setTodos }}>
           <TodoList />
           

@@ -35,6 +35,7 @@ export default function Todo({ todo, handleCheck, DelHandeler, ModHandeler }) {
       return t;
     });
     setTodos(updatedTodos);
+    console.log(updatedTodos)
     ShowSnak("تم التعديل بنجاح");
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }

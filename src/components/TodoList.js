@@ -24,15 +24,17 @@ import Todo from "./Todo";
 // OTHERS
 import { TodosContext } from "../contexts/todosContext";
 import { useSnak } from "../contexts/SnakContext";
-import { useContext, useState, useEffect, useMemo } from "react";
+import { useContext, useState, useEffect, useMemo, useReducer } from "react";
 // DIALOG IMPORTS
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+//Reducer
+import Reducer from "../reducers/TodoListReduce";
+import { type } from "@testing-library/user-event/dist/type";
 export default function TodoList() {
-  const { todos, setTodos } = useContext(TodosContext);
   const ShowSnak = useSnak();
   const [titleInput, setTitleInput] = useState("");
   const [displayedTodosType, setDisplayedTodosType] = useState("all");
@@ -40,6 +42,9 @@ export default function TodoList() {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [showUpdateDialog, setShowUpdateDialog] = useState(false);
     const [passed, setPassed] =useState({});
+    //Reducer
+    const [todos ,Dispatch ]= useReducer(Reducer, []);
+    
    
   // filteration arrays
    
@@ -74,28 +79,17 @@ export default function TodoList() {
   });
 
   useEffect(() => {
-  console.log("calling use effect");
-  const storageTodos = JSON.parse(localStorage.getItem("todos"));
-  if (Array.isArray(storageTodos)) {
-    setTodos(storageTodos);
-  }
+    Dispatch({type:"get"});
+  
 }, []);
 
   function changeDisplayedType(e) {
     setDisplayedTodosType(e.target.value);
   }
+ 
+  //Adding func
   function handleAddClick() {
-    const newTodo = {
-      id: uuidv4(),
-      title: titleInput,
-      details: "",
-      isCompleted: false,
-    };
-
-    const updatedTodos = [...todos, newTodo];
-    setTodos(updatedTodos);
-
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    Dispatch({type: "Add", params: {titleInput}});
     setTitleInput("");
     ShowSnak("تمت الاضافة بنجاح")
   }
@@ -110,14 +104,12 @@ export default function TodoList() {
     setShowDeleteDialog(false);
   }
 
+  //Deleting function
   function handleDeleteConfirm() {
-    const updatedTodos = todos.filter((t) => {
-      return t.id != passed.id;
-    });
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    Dispatch({type: "Delete", params: {passed}});
     setShowDeleteDialog(false);
     ShowSnak("تم الحذف بنجاح")
+    
   }
 
 
@@ -131,20 +123,12 @@ export default function TodoList() {
   function handleUpdateClose() {
     setShowUpdateDialog(false);
   }
-
+  //modification func
    function handleUpdateConfirm() {
-    const updatedTodos = todos.map((t) => {
-      if (t.id == passed.id) {
-        return { ...t, title: passed.title, details: passed.details };
-      } else {
-        return t;
-      }
-    });
-
-    setTodos(updatedTodos);
-    setShowUpdateDialog(false);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    ShowSnak("تم التحديث بنجاح")
+        Dispatch({type: "Update", params:{passed}})
+        setShowUpdateDialog(false);
+        ShowSnak("تم التحديث بنجاح")
+    
   }
   return ( 
     <>
