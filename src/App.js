@@ -2,11 +2,11 @@ import logo from "./logo.svg";
 import "./App.css";
 import TodoList from "./components/TodoList";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { TodosContext } from "./contexts/todosContext";
 import { useState } from "react";
 import { SnakProvider } from "./contexts/SnakContext";
 import { v4 as uuidv4 } from "uuid";
 import SimpleSnackbar from "./components/Snak";
+import { ReducerProvider } from "./contexts/todosContext";
 const theme = createTheme({
   typography: {
     fontFamily: ["Alexandria"],
@@ -42,6 +42,7 @@ function App() {
 
   
   return (
+    <ReducerProvider>
     <ThemeProvider theme={theme}>
       <div
         className="App"
@@ -54,14 +55,12 @@ function App() {
           direction: "rtl",
         }}
       >
-        <SnakProvider  >
-        <TodosContext.Provider value={{ todos, setTodos }}>
+        <SnakProvider  > 
           <TodoList />
-          
-        </TodosContext.Provider>
         </SnakProvider>
       </div>
     </ThemeProvider>
+    </ReducerProvider>
   );
 }
 

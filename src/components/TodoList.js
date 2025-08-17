@@ -22,7 +22,7 @@ import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import Todo from "./Todo";
 
 // OTHERS
-import { TodosContext } from "../contexts/todosContext";
+import { useTodos } from "../contexts/todosContext";
 import { useSnak } from "../contexts/SnakContext";
 import { useContext, useState, useEffect, useMemo, useReducer } from "react";
 // DIALOG IMPORTS
@@ -43,7 +43,7 @@ export default function TodoList() {
     const [showUpdateDialog, setShowUpdateDialog] = useState(false);
     const [passed, setPassed] =useState({});
     //Reducer
-    const [todos ,Dispatch ]= useReducer(Reducer, []);
+    const [todos ,Dispatch ]= useTodos();
     
    
   // filteration arrays

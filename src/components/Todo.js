@@ -13,10 +13,11 @@ import IconButton from "@mui/material/IconButton";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 import { useContext, useState } from "react";
-import { TodosContext } from "../contexts/todosContext";
+import {  useTodos } from "../contexts/todosContext";
 
 
 import { useSnak } from "../contexts/SnakContext";
+import { type } from "@testing-library/user-event/dist/type";
 export default function Todo({ todo, handleCheck, DelHandeler, ModHandeler }) {
     const ShowSnak = useSnak();
   
@@ -24,20 +25,12 @@ export default function Todo({ todo, handleCheck, DelHandeler, ModHandeler }) {
     title: todo.title,
     details: todo.details,
   });
-  const { todos, setTodos } = useContext(TodosContext);
+  const [ todos, Disapatch ]= useTodos();
 
   // EVENT HANDLERS
   function handleCheckClick() {
-    const updatedTodos = todos.map((t) => {
-      if (t.id == todo.id) {
-        t.isCompleted = !t.isCompleted;
-      }
-      return t;
-    });
-    setTodos(updatedTodos);
-    console.log(updatedTodos)
+    Disapatch({type:"Up", params: {todo}});
     ShowSnak("تم التعديل بنجاح");
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
 function showDelDialog(){
