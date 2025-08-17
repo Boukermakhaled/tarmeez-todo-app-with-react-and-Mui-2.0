@@ -39,6 +39,7 @@ const newTodo = {
   if (Array.isArray(storageTodos)) {
     return storageTodos;
     }
+    return todos;
 }else if(type === "Up"){
   const updatedTodos = todos.map((t) => {
       if (t.id == params.todo.id) {
@@ -48,7 +49,5 @@ const newTodo = {
     });
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     return updatedTodos
-    
-
 }
 }
