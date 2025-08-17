@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4c2c10ba.css",
+    "main.js": "/static/js/main.92297a79.js",
+    "static/js/787.3bf0dcc2.chunk.js": "/static/js/787.3bf0dcc2.chunk.js",
+    "static/media/Alexandria-Bold.ttf": "/static/media/Alexandria-Bold.3a05f905452665b339bc.ttf",
+    "static/media/Alexandria-Black.ttf": "/static/media/Alexandria-Black.1cf183bfa9539102e245.ttf",
+    "static/media/Alexandria-Light.ttf": "/static/media/Alexandria-Light.6cd796b123efc33a9785.ttf",
+    "static/media/Alexandria-Regular.ttf": "/static/media/Alexandria-Regular.6089c9af6e02b70a15df.ttf",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.4c2c10ba.css.map": "/static/css/main.4c2c10ba.css.map",
+    "main.92297a79.js.map": "/static/js/main.92297a79.js.map",
+    "787.3bf0dcc2.chunk.js.map": "/static/js/787.3bf0dcc2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4c2c10ba.css",
+    "static/js/main.92297a79.js"
+  ]
+}

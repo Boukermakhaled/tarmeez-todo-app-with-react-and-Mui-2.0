@@ -40,7 +40,6 @@ const newTodo = {
     return storageTodos;
     }
 }else if(type === "Up"){
-  console.log(params)
   const updatedTodos = todos.map((t) => {
       if (t.id == params.todo.id) {
        return {...t,isCompleted: !t.isCompleted};
